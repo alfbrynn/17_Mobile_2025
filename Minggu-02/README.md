@@ -3,13 +3,13 @@
 ## Soal 1
 
 output yang diminta <br>
-![Output yang diminta](img\soal1.png)
+![Output yang diminta](img/soal1.png)
 
 ## Soal 2
 
 Mengapa sangat penting untuk memahami bahasa pemrograman Dart sebelum kita menggunakan framework Flutter ? Jelaskan!
 
-- Flutter menggunakan Dart sebagai bahasa utama untuk menulis logika aplikasi, UI, dan interaksi pengguna
+Flutter menggunakan Dart sebagai bahasa utama untuk menulis logika aplikasi, UI, dan interaksi pengguna.
 
 ## Soal 3
 
@@ -47,11 +47,11 @@ adalah fitur Dart yang mencegah variabel memiliki nilai null secara tidak sengaj
 - Non-nullable: Variabel harus diinisialisasi dengan nilai bukan null.
   Nullable: Ditandai dengan tanda ?, variabel boleh bernilai null
 
-contoh kode
-![Null Safety](img\NullSafety.png)
+contoh kode <br>
+![Null Safety](img/NullSafety.png)
 
 Late Variabel
 digunakan untuk menunda inisialisasi variabel non-nullable sampai nanti, tapi tetap menjamin bahwa variabel akan diisi sebelum digunakan.
 
-Contoh kdoe
-![Late Variabel](img\LateVariabel.png)
+Contoh kode <br>
+![Late Variabel](img/LateVariabel.png)
