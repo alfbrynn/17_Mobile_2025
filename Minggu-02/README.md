@@ -48,7 +48,7 @@ adalah fitur Dart yang mencegah variabel memiliki nilai null secara tidak sengaj
   Nullable: Ditandai dengan tanda ?, variabel boleh bernilai null
 
 contoh kode <br>
-![Null Safety](img/NullSafety.png)
+![Null Safety](img/nullsafety.png)
 
 Late Variabel
 digunakan untuk menunda inisialisasi variabel non-nullable sampai nanti, tapi tetap menjamin bahwa variabel akan diisi sebelum digunakan.
