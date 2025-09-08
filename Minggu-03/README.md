@@ -37,4 +37,21 @@ Perbaikan kode <br>
 Output <br>
 ![Null Safety](img/p3_no1_output.png)
 
-Pada contoh kode, penulisan Index dan index tidak konsisten. Tidak ada deklarasi tipe data untuk index.
+Pada contoh kode, penulisan Index dan index tidak konsisten. Tidak ada deklarasi tipe data untuk index. Increment nya juga salah, tidak ada index++. <br>
+Output kode akan mencetak angka dari 10 hingga 26. Perulangan dimulai dari index = 10, dan terus bertambah hingga index = 27.
+
+Perbaikan kode <br>
+![Null Safety](img/p3_no2.png)
+
+Output <br>
+![Null Safety](img/p3_no2_output.png)
+
+break akan menghentikan perulangan saat index == 21. continue akan melewati pencetakan jika index >= 10 && index <= 15.
+
+## Tugas
+
+Kode Program
+![Null Safety](img/tugas.png)
+
+Output <br>
+![Null Safety](img/tugas_output.png)
