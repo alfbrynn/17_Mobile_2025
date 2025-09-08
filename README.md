@@ -10,17 +10,10 @@ Repositori untuk mata kuliah Pemrograman Mobile
 
 ## Tabel Link Repo Mingguan
 
-| Minggu | Link Repo Tugas     |
-| ------ | ------------------- |
-| 1      | [Repo Minggu 1](#)  |
-| 2      | Minggu-02 (#)       |
-| 3      | Minggu-03 (#)       |
-| 4      | [Repo Minggu 4](#)  |
-| 5      | [Repo Minggu 5](#)  |
-| 6      | [Repo Minggu 6](#)  |
-| 7      | [Repo Minggu 7](#)  |
-| 8      | [Repo Minggu 8](#)  |
-| 9      | [Repo Minggu 9](#)  |
-| 10     | [Repo Minggu 10](#) |
+| Minggu | Link Repo Tugas                                                               |
+| ------ | ----------------------------------------------------------------------------- |
+| 1      | [Repo Minggu 1](#)                                                            |
+| 2      | [Repo Minggu 2](https://github.com/pipall/17_Mobile_2025/tree/main/Minggu-02) |
+| 3      | [Repo Minggu 3](https://github.com/pipall/17_Mobile_2025/tree/main/Minggu-03) |
 
 > Silakan ganti tanda `#` dengan link repo tugas masing-masing
