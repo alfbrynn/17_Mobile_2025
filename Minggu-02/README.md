@@ -50,8 +50,14 @@ adalah fitur Dart yang mencegah variabel memiliki nilai null secara tidak sengaj
 contoh kode <br>
 ![Null Safety](img/nullsafety.png)
 
+output <br>
+![Null Safety](img/outputnull.png)
+
 Late Variabel
 digunakan untuk menunda inisialisasi variabel non-nullable sampai nanti, tapi tetap menjamin bahwa variabel akan diisi sebelum digunakan.
 
 Contoh kode <br>
 ![Late Variabel](img/LateVariabel.png)
+
+output <br>
+![Null Safety](img/OutputLate.png)
