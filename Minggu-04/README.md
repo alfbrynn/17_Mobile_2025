@@ -146,3 +146,177 @@ Menambahkan NIM pada kode program
 #### Output
 
 ![list for output](img/p4-5-output.png)
+
+## Praktikum 5: Eksperimen Tipe Data Records
+
+### Langkah 1
+
+#### Kode Program
+
+![dua posisional fields](img/p5-1.png)
+
+#### Output
+
+![output](img/p5-1-output.png)
+
+### Langkah 2
+
+#### Kode Program
+
+![switch](img/p5-2.png)
+
+#### output
+
+![switch](img/p5-2-output.png)
+
+### Langkah 3
+
+#### Kode Program
+
+![non-nullable](img/p5-3.png)
+
+#### Output
+
+![output](img/p5-3-output.png)
+
+### Langkah 4
+
+#### Kode Program
+
+![akses field records](img/p5-4.png)
+
+#### Ouput
+
+![output](img/p5-4-output.png)
+
+## Tugas Praktikum
+
+2. Jelaskan yang dimaksud Functions dalam bahasa Dart! <br>
+   🔹 Functions adalah blok kode yang dapat dipanggil untuk menjalankan tugas tertentu. Fungsinya mirip seperti “resep” yang bisa digunakan berulang kali. Dalam Dart, function bisa menerima parameter dan mengembalikan nilai.
+
+3. Jelaskan jenis-jenis parameter di Functions beserta contoh sintaksnya!
+   Dart mendukung beberapa jenis parameter:
+
+Positional Parameter: Parameter berdasarkan urutan.
+
+dart
+
+void greet(String name) {
+print('Hello $name');
+}
+
+Optional Positional Parameter: Parameter yang bisa tidak diisi.
+
+dart
+
+void greet([String? name]) {
+print('Hello $name');
+}
+
+Named Parameter: Parameter yang disebutkan dengan nama.
+
+dart
+
+void greet({String? name}) {
+print('Hello $name');
+}
+
+Required Named Parameter: Named parameter yang wajib diisi.
+
+dart
+
+void greet({required String name}) {
+print('Hello $name');
+}
+
+4. Jelaskan maksud Functions sebagai first-class objects beserta contoh sintaknya!
+   Functions sebagai first-class objects berarti fungsi dapat:
+
+- Disimpan dalam variabel
+- Dikirim sebagai parameter
+- Dikembalikan dari fungsi lain
+
+Contoh:
+
+dart
+
+void sayHello() {
+print('Hello!');
+}
+
+void execute(Function f) {
+f();
+}
+
+void main() {
+var greet = sayHello;
+execute(greet); // Output: Hello!
+}
+
+5. Apa itu Anonymous Functions? Jelaskan dan berikan contohnya!
+   Anonymous Functions adalah fungsi tanpa nama, biasanya digunakan sebagai parameter atau callback.
+
+Contoh:
+
+dart
+
+var numbers = [1, 2, 3];
+numbers.forEach((num) {
+print(num \* 2);
+});
+
+6. Jelaskan perbedaan Lexical scope dan Lexical closures! Berikan contohnya!
+
+Lexical Scope: Variabel hanya bisa diakses dalam blok tempat ia didefinisikan.
+
+dart
+void main() {
+int x = 10;
+void printX() {
+print(x); // Bisa akses x karena dalam scope
+}
+printX();
+}
+
+Lexical Closure: Fungsi bisa “mengingat” variabel dari scope luar meski scope itu sudah selesai.
+
+dart
+
+Function counter() {
+int count = 0;
+return () {
+count++;
+print(count);
+};
+}
+
+void main() {
+var increment = counter();
+increment(); // Output: 1
+increment(); // Output: 2
+}
+
+7. Jelaskan dengan contoh cara membuat return multiple value di Functions!
+
+Dart tidak mendukung return multiple values secara langsung, tapi bisa menggunakan Record atau Map.
+
+Contoh dengan Record (Dart 3):
+
+dart
+
+(String, int) getUser() {
+return ('Alif', 225100123);
+}
+
+void main() {
+var (name, nim) = getUser();
+print('Nama: $name, NIM: $nim');
+}
+
+Contoh dengan Map:
+
+dart
+
+Map<String, dynamic> getUser() {
+return {'name': 'Alif', 'nim': 2341720025};
+}
