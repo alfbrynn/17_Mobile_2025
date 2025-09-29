@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/basic_widgets/image_widget.dart';
+import 'package:hello_world/basic_widgets/text_widget.dart';
+import 'package:hello_world/basic_widgets/loading_cupertino.dart';
+import 'basic_widgets/fab_widget.dart';
+import 'basic_widgets/scaffold_widget.dart';
+import 'basic_widgets/dialog_widget.dart';
+import 'basic_widgets/textfield_widget.dart';
+import 'basic_widgets/datepicker_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -104,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('Muhammad Alif Febriansyah'),
+            const FabWidget(),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
