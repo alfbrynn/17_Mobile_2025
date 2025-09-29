@@ -12,11 +12,9 @@ class MyApp extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            // Soal 1: Column di dalam Expanded
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Soal 2: Padding dan gaya teks
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: const Text(
@@ -31,10 +29,61 @@ class MyApp extends StatelessWidget {
               ],
             ),
           ),
-          // Soal 3: Ikon dan teks
-          const Icon(Icons.star, color: Colors.red),
-          const Text('41'),
+          Column(
+            children: const [
+              Icon(Icons.star, color: Colors.red),
+              Text('41'),
+            ],
+          ),
         ],
+      ),
+    );
+
+    // Ambil warna primary sekali (di luar helper)
+    final Color color = Theme.of(context).primaryColor;
+
+    // Helper: hanya buat satu kolom tombol
+    Column _buildButtonColumn(Color color, IconData icon, String label) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: color),
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: color,
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
+    // Sekarang buat buttonSection menggunakan helper di atas
+    Widget buttonSection = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _buildButtonColumn(color, Icons.call, 'CALL'),
+        _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
+        _buildButtonColumn(color, Icons.share, 'SHARE'),
+      ],
+    );
+
+    Widget textSection = Container(
+      padding: const EdgeInsets.all(32),
+      child: const Text(
+        'Carilah teks di internet yang sesuai '
+        'dengan foto atau tempat wisata yang ingin '
+        'Anda tampilkan. '
+        'Tambahkan nama dan NIM Anda sebagai '
+        'identitas hasil pekerjaan Anda. '
+        'Selamat mengerjakan 🙂.',
+        softWrap: true,
       ),
     );
 
@@ -42,7 +91,19 @@ class MyApp extends StatelessWidget {
       title: 'Flutter layout: Muhammad Alif Febriansyah',
       home: Scaffold(
         appBar: AppBar(title: const Text('Flutter layout demo')),
-        body: Center(child: titleSection),
+        body: ListView(
+          children: [
+            Image.asset(
+              'images/alun-alun-bangil.jpeg',
+              width: 600,
+              height: 240,
+              fit: BoxFit.cover,
+            ),
+            titleSection,
+            buttonSection,
+            textSection,
+          ],
+        ),
       ),
     );
   }
