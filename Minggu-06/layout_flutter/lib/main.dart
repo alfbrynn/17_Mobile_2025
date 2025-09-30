@@ -18,12 +18,12 @@ class MyApp extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: const Text(
-                    'Wisata Gunung di Batu',
+                    'Gunung Arjuno',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Text(
-                  'Batu, Malang, Indonesia',
+                  'Tretes, Pasuruan, Indonesia',
                   style: TextStyle(color: Colors.grey),
                 ),
               ],
@@ -77,12 +77,10 @@ class MyApp extends StatelessWidget {
     Widget textSection = Container(
       padding: const EdgeInsets.all(32),
       child: const Text(
-        'Carilah teks di internet yang sesuai '
-        'dengan foto atau tempat wisata yang ingin '
-        'Anda tampilkan. '
-        'Tambahkan nama dan NIM Anda sebagai '
-        'identitas hasil pekerjaan Anda. '
-        'Selamat mengerjakan 🙂.',
+        'Gunung Arjuno (terkadang dieja Gunung Arjuna) adalah '
+        'sebuah gunung berapi kerucut (istirahat) di Jawa Timur,'
+        'Indonesia dengan ketinggian 3.339 m dpl. '
+        'Muhammad Alif Febriansyah/2341720025',
         softWrap: true,
       ),
     );
@@ -94,7 +92,7 @@ class MyApp extends StatelessWidget {
         body: ListView(
           children: [
             Image.asset(
-              'images/alun-alun-bangil.jpeg',
+              'images/Wisata-Gunung-Arjuno.jpg',
               width: 600,
               height: 240,
               fit: BoxFit.cover,
