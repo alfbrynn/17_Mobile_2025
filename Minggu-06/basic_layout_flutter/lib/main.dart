@@ -5,7 +5,7 @@ void main() {
   runApp(const MyApp());
 }
 
-/// Entry point aplikasinya
+/// Entry point
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
