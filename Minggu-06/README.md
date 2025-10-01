@@ -37,3 +37,12 @@ Text dimasukkan ke dalam 'Container' agar bisa diberi padding di semua sisi. 'Ed
 ### Penjelasan
 
 Gambar ditambahkan ke dalam 'body' menggunakan widget 'Image.set'. Properti 'BoxFit.cover' digunakan agar gambar memenuhi ruang yang tersedia tanpa distorsi. Layout yang awalnya 'column' diubah menjadi 'lastView' agar tampilan bisa di scroll saat layar perangkat terlalu kecil untuk menampilkan semua sekaligus.
+
+# Project Basic_Layout_Flutter
+
+![basic layout fluttter](img/basic_layout_flutter/01.png)
+![basic layout flutter](img/basic_layout_flutter/02.png)
+
+### Penjelasan
+
+Saya memisahkan kode widget sehingga dapat di panggil di kode main. content di dalam Rujak kikil saya masukkan ke dalam kode RujakPage kemudian class RujakPage di panggil ke main.
