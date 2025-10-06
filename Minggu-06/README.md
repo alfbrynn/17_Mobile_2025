@@ -46,3 +46,7 @@ Gambar ditambahkan ke dalam 'body' menggunakan widget 'Image.set'. Properti 'Box
 ### Penjelasan
 
 Saya memisahkan kode widget sehingga dapat di panggil di kode main. content di dalam Rujak kikil saya masukkan ke dalam kode RujakPage kemudian class RujakPage di panggil ke main.
+
+# Project Belanja
+
+![belanja](img/belanja/01.png)
