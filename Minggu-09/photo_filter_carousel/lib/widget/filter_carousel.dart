@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'filter.dart';
 
 @immutable
 class PhotoFilterCarousel extends StatefulWidget {
