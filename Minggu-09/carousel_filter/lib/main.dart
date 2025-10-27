@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import 'pages/camera_page.dart';
+import 'package:camera/camera.dart';
+import 'pages/camera_with_filter_page.dart';
 
-void main() {
-  runApp(const MyCameraApp());
+late List<CameraDescription> cameras;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
+  runApp(const MyApp());
 }
 
-class MyCameraApp extends StatelessWidget {
-  const MyCameraApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Camera & Filter Carousel',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const CameraPage(),
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
+      home: CameraWithFilterPage(),
     );
   }
 }
