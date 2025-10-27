@@ -251,6 +251,7 @@ return Text('Halo');
 ![img](img/carousel_filter/kamera_filter.gif)
 
 📄 File: lib/main.dart
+
 ![img](img/carousel_filter/01.png)
 
 Penjelasan:
@@ -264,6 +265,7 @@ runApp() → menjalankan aplikasi setelah kamera siap.
 Kelebihan desain ini: main.dart tetap bersih dan sesuai standar Flutter — hanya inisialisasi & navigasi awal.
 
 📄 File: lib/camera_with_filter.dart
+
 ![img](img/carousel_filter/02.png)
 
 Penjelasan:
@@ -281,6 +283,7 @@ PreviewPage menampilkan hasil foto dengan filter yang sama.
 Tidak menyimpan ke galeri — hanya menampilkan hasil di aplikasi.
 
 📄 File: lib/filter_indicator.dart
+
 ![img](img/carousel_filter/03.png)
 
 Penjelasan
