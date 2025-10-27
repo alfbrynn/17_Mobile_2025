@@ -3,8 +3,7 @@
 - Langkah 1: Buat Project Baru
   📄 File: main.dart
 
-![img](img/kamera_flutter/)
-Perintah:
+![img](img/kamera_flutter/01.png)
 
 Buat project Flutter baru dengan nama kamera_flutter.
 
@@ -13,9 +12,9 @@ Tujuan: Menyiapkan struktur awal aplikasi Flutter.
 - Langkah 2: Tambah Dependensi
   📄 File: pubspec.yaml
 
-Tambahkan plugin berikut:
+![img](img/kamera_flutter/02.png)
 
-![img](img/kamera_flutter/)
+Plugin yang ditambahkan:
 
 yaml
 dependencies:
@@ -33,13 +32,8 @@ path: mengelola path file lintas platform.
 - Langkah 3: Ambil Sensor Kamera dari Device
   📄 File: main.dart
 
-Kode:
-![img](img/kamera_flutter/)
+![img](img/kamera_flutter/03.png)
 
-dart
-WidgetsFlutterBinding.ensureInitialized();
-final cameras = await availableCameras();
-final firstCamera = cameras.first;
 Tujuan:
 
 Menginisialisasi plugin sebelum runApp().
@@ -51,25 +45,8 @@ Memilih kamera pertama (biasanya kamera belakang).
 - Langkah 4: Buat dan Inisialisasi CameraController
   📄 File: lib/widget/takepicture_screen.dart
 
-Kode:
-![img](img/kamera_flutter/)
+![img](img/kamera_flutter/04.png)
 
-dart
-late CameraController \_controller;
-late Future<void> \_initializeControllerFuture;
-
-@override
-void initState() {
-super.initState();
-\_controller = CameraController(widget.camera, ResolutionPreset.medium);
-\_initializeControllerFuture = \_controller.initialize();
-}
-
-@override
-void dispose() {
-\_controller.dispose();
-super.dispose();
-}
 Tujuan:
 
 Membuat CameraController untuk mengatur kamera.
@@ -81,26 +58,8 @@ Membersihkan controller saat widget dihancurkan.
 🔹 Langkah 5: Gunakan CameraPreview
 📄 File: lib/widget/takepicture_screen.dart
 
-Kode:
-![img](img/kamera_flutter/)
+![img](img/kamera_flutter/05.png)
 
-dart
-@override
-Widget build(BuildContext context) {
-return Scaffold(
-appBar: AppBar(title: const Text('Take a picture - NIM Anda')),
-body: FutureBuilder<void>(
-future: \_initializeControllerFuture,
-builder: (context, snapshot) {
-if (snapshot.connectionState == ConnectionState.done) {
-return CameraPreview(\_controller);
-} else {
-return const Center(child: CircularProgressIndicator());
-}
-},
-),
-);
-}
 Tujuan:
 
 Menampilkan pratinjau kamera setelah controller selesai diinisialisasi.
@@ -110,21 +69,8 @@ Menunggu proses async dengan FutureBuilder.
 - Langkah 6: Ambil Foto dengan CameraController
   📄 File: lib/widget/takepicture_screen.dart
 
-Kode:
-![img](img/kamera_flutter/)
+![img](img/kamera_flutter/06.png)
 
-dart
-FloatingActionButton(
-onPressed: () async {
-try {
-await \_initializeControllerFuture;
-final image = await \_controller.takePicture();
-} catch (e) {
-print(e);
-}
-},
-child: const Icon(Icons.camera_alt),
-)
 Tujuan:
 
 Mengambil foto saat tombol ditekan.
@@ -134,22 +80,8 @@ Menangani error dengan try/catch.
 - Langkah 7: Buat Widget DisplayPictureScreen
   📄 File: lib/widget/displaypicture_screen.dart
 
-Kode:
-![img](img/kamera_flutter/)
+![img](img/kamera_flutter/07.png)
 
-dart
-class DisplayPictureScreen extends StatelessWidget {
-final String imagePath;
-const DisplayPictureScreen({super.key, required this.imagePath});
-
-@override
-Widget build(BuildContext context) {
-return Scaffold(
-appBar: AppBar(title: const Text('Display the Picture - NIM Anda')),
-body: Image.file(File(imagePath)),
-);
-}
-}
 Tujuan:
 
 Menampilkan hasil foto yang diambil.
@@ -159,17 +91,8 @@ Menerima path gambar dari halaman sebelumnya.
 - Langkah 8: Edit main.dart
   📄 File: main.dart
 
-Kode:
-![img](img/kamera_flutter/)
+![img](img/kamera_flutter/08.png)
 
-dart
-runApp(
-MaterialApp(
-theme: ThemeData.dark(),
-home: TakePictureScreen(camera: firstCamera),
-debugShowCheckedModeBanner: false,
-),
-);
 Tujuan:
 
 Menjalankan aplikasi dengan tema gelap.
@@ -180,14 +103,8 @@ Menampilkan halaman TakePictureScreen.
   📄 File: lib/widget/takepicture_screen.dart
 
 Kode tambahan:
-![img](img/kamera_flutter/)
+![img](img/kamera_flutter/09.png)
 
-dart
-await Navigator.of(context).push(
-MaterialPageRoute(
-builder: (context) => DisplayPictureScreen(imagePath: image.path),
-),
-);
 Tujuan:
 
 Setelah foto diambil, tampilkan halaman baru untuk melihat hasilnya.
@@ -199,14 +116,14 @@ Setelah foto diambil, tampilkan halaman baru untuk melihat hasilnya.
 
 Buat project Flutter baru dengan nama photo_filter_carousel.
 
-![img](img/photo_filter_carousel/01.png)
+![img](img/photo_filter_carousel/06.png)
 
 Tujuan: Menyiapkan struktur awal aplikasi Flutter.
 
 - Langkah 2: Buat Widget Selector Ring dan Shadow Gradient
   📄 File: lib/widget/filter_selector.dart
 
-![img](img/photo_filter_carousel/02.png)
+![img](img/photo_filter_carousel/01.png)
 
 Penjelasan: Widget ini menampilkan carousel filter warna yang bisa digeser. Saat pengguna memilih filter, warna akan diterapkan ke foto.
 
@@ -225,7 +142,7 @@ PageController: mengatur scroll horizontal.
 - Langkah 3: Buat Widget Photo Filter Carousel
   📄 File: lib/widget/filter_carousel.dart
 
-![img](img/photo_filter_carousel/03.png)
+![img](img/photo_filter_carousel/02.png)
 
 Penjelasan: Widget utama yang menampilkan foto dan carousel filter di bagian bawah.
 
@@ -244,7 +161,7 @@ Catatan: Foto diambil dari URL dan diberi efek warna menggunakan colorBlendMode.
 - Langkah 4: Buat Filter Warna – Bagian 1
   📄 File: lib/widget/carousel_flowdelegate.dart
 
-![img](img/photo_filter_carousel/04.png)
+![img](img/photo_filter_carousel/03.png)
 
 Penjelasan: Custom FlowDelegate untuk mengatur animasi dan posisi item dalam carousel.
 
@@ -259,7 +176,7 @@ viewportOffset: digunakan untuk mengetahui posisi scroll saat ini.
 - Langkah 5: Buat Widget Filter Item
   📄 File: lib/widget/filter_item.dart
 
-![img](img/photo_filter_carousel/05.png)
+![img](img/photo_filter_carousel/04.png)
 
 Penjelasan: Widget individual untuk setiap warna filter dalam carousel.
 
@@ -274,29 +191,16 @@ Image.network: menampilkan tekstur dengan warna filter.
 - Langkah 6: Implementasi ke main.dart
   📄 File: lib/main.dart
 
+![img](img/photo_filter_carousel/05.png)
+
 Penjelasan: Menjalankan aplikasi dan menampilkan PhotoFilterCarousel sebagai halaman utama.
 
 Kode:
 
-dart
-void main() {
-runApp(const MaterialApp(
-home: PhotoFilterCarousel(),
-debugShowCheckedModeBanner: false,
-));
-}
+## Jawaban Soal
 
-## 🧠 Ringkasan Alur Aplikasi
+### Nomor 3: Jelaskan maksud void async pada praktikum 1
 
-User membuka aplikasi → PhotoFilterCarousel ditampilkan.
-
-Foto default ditampilkan dengan warna filter awal.
-
-User menggeser carousel → warna filter berubah.
-
-Efek warna diterapkan ke foto secara real-time.
-
-❓ Nomor 3: Jelaskan maksud void async pada praktikum 1
 void async digunakan untuk mendefinisikan fungsi asynchronous, yaitu fungsi yang dapat menjalankan proses secara tidak langsung (tidak blocking). Dalam konteks Flutter:
 
 void menunjukkan bahwa fungsi tidak mengembalikan nilai.
@@ -312,7 +216,8 @@ final foto = await ImagePicker().pickImage(source: ImageSource.camera);
 }
 Tanpa async, kita tidak bisa menggunakan await, dan proses pengambilan foto bisa menyebabkan UI freeze karena menunggu hasil secara langsung.
 
-❓ Nomor 4: Jelaskan fungsi dari anotasi @immutable dan @override
+### Nomor 4: Jelaskan fungsi dari anotasi @immutable dan @override
+
 @immutable:
 
 Digunakan untuk menandai bahwa sebuah class tidak boleh diubah setelah dibuat.
@@ -341,6 +246,47 @@ Widget build(BuildContext context) {
 return Text('Halo');
 }
 
-tugas gabungan praktim 1 dan 2
+## Tugas gabungan praktim 1 dan 2
 
-[img](img/carousel_filter/kamera%20filter.gif)
+[img](img/carousel_filter/kamera_filter.gif)
+
+📄 File: lib/main.dart
+[img](img/carousel_filter/01.png)
+
+Penjelasan:
+
+availableCameras() → memuat semua kamera di perangkat (biasanya depan dan belakang).
+
+MyApp → aplikasi utama dengan halaman pertama CameraWithFilterPage.
+
+runApp() → menjalankan aplikasi setelah kamera siap.
+
+Kelebihan desain ini: main.dart tetap bersih dan sesuai standar Flutter — hanya inisialisasi & navigasi awal.
+
+📄 File: lib/main.dart
+[img](img/carousel_filter/02.png)
+
+Penjelasan:
+
+Filter diterapkan real-time dengan ColorFiltered.
+
+PageView digunakan untuk memilih filter secara horizontal (seperti carousel).
+
+FilterIndicator menunjukkan huruf awal filter di tengah tombol jepret.
+
+Nama filter aktif ditampilkan di bawah tombol kamera.
+
+PreviewPage menampilkan hasil foto dengan filter yang sama.
+
+Tidak menyimpan ke galeri — hanya menampilkan hasil di aplikasi.
+
+📄 File: lib/main.dart
+[img](img/carousel_filter/03.png)
+
+Penjelasan
+
+label.substring(0, 1) → mengambil huruf pertama dari nama filter.
+
+Diposisikan di tengah tombol jepret agar intuitif dan estetik.
+
+Ukuran besar agar mudah terlihat di layar kamera.
