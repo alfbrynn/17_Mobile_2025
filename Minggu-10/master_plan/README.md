@@ -222,6 +222,7 @@ Checkbox dan TextFormField kini mengakses dan memodifikasi data melalui planNoti
 Menggunakan salinan list agar tetap immutable dan memicu rebuild.
 
 Langkah 7: Edit \_buildList()
+
 ![img](img/p2/07.png)
 
 Penjelasan:
@@ -231,6 +232,7 @@ Menambahkan parameter Plan agar bisa digunakan untuk membangun list tugas.
 Tetap menggunakan scrollController untuk UX yang lebih baik.
 
 Langkah 8–9: Tambah SafeArea dan tampilkan progres
+
 ![img](img/p2/08.png)
 
 Penjelasan:
@@ -310,3 +312,233 @@ PlanProvider mewarisi InheritedNotifier, yang memungkinkan data Plan disebarkan 
 Widget seperti Checkbox dan TextFormField tidak lagi memanggil setState(), melainkan memperbarui data melalui planNotifier.value, sehingga lebih terorganisir dan scalable.
 
 Dengan pendekatan ini, kita belajar bagaimana membangun aplikasi Flutter yang lebih modular, maintainable, dan siap untuk dikembangkan lebih lanjut menggunakan arsitektur yang lebih kompleks seperti Provider atau Riverpod.
+
+## 🧠 Tujuan Praktikum 3
+
+Mengimplementasikan multiple screen state management.
+
+Memodifikasi PlanProvider agar mendukung List<Plan>.
+
+Menambahkan screen baru untuk membuat dan memilih rencana.
+
+Menyusun arsitektur aplikasi agar scalable dan modular.
+
+## 🔍 Penjelasan Setiap Langkah dan Kode Praktikum 3
+
+### Langkah 1: Edit PlanProvider
+
+![img](img/p3/01.png)
+
+Penjelasan:
+
+Mengubah PlanProvider agar menyimpan List<Plan>, bukan hanya satu Plan.
+
+Ini memungkinkan kita mengelola banyak rencana sekaligus.
+
+ValueNotifier<List<Plan>> digunakan agar perubahan pada list bisa memicu rebuild.
+
+### Langkah 2: Edit main.dart
+
+![img](img/p3/02.png)
+
+Penjelasan:
+
+Inisialisasi PlanProvider dengan list kosong.
+
+PlanScreen akan menerima satu Plan sebagai parameter.
+
+### Langkah 3: Edit plan_screen.dart
+
+![img](img/p3/03.png)
+
+Penjelasan:
+
+PlanScreen sekarang menerima satu Plan dari luar.
+
+Ini memungkinkan kita menampilkan screen berdasarkan rencana yang dipilih.
+
+### Langkah 4: Error Handling
+
+Karena PlanProvider sekarang menyimpan list, kita harus mencari Plan yang sesuai berdasarkan nama.
+
+![img](img/p3/04.png)
+
+Penjelasan:
+
+Mengambil Plan yang cocok dari list berdasarkan nama.
+
+Ini penting agar data yang ditampilkan sesuai dengan rencana yang dipilih.
+
+### Langkah 5: Tambah Getter plan
+
+![img](img/p3/05.png)
+
+Penjelasan:
+
+Getter ini mempermudah akses ke Plan yang dikirim ke PlanScreen.
+
+### Langkah 6: Method initState()
+
+![img](img/p3/06.png)
+
+Penjelasan:
+
+Scroll controller digunakan untuk menghilangkan fokus saat scroll.
+
+Meningkatkan UX agar keyboard tidak muncul terus-menerus.
+
+### Langkah 7: Widget build()
+
+![img](img/p3/07.png)
+
+Penjelasan:
+
+Mengambil list Plan dari provider.
+
+Menentukan currentPlan yang sedang aktif.
+
+### Langkah 8: Widget \_buildTaskTile()
+
+Sama seperti sebelumnya, tapi sekarang menggunakan List<Plan> dan planNotifier.
+
+![img](img/p3/08.png)
+
+Penjelasan:
+
+Saat checkbox atau teks berubah, kita update Plan yang sesuai di dalam list.
+
+### Langkah 9: Buat screen baru plan_creator_screen.dart
+
+![img](img/p3/09.png)
+
+Penjelasan:
+
+Screen ini digunakan untuk membuat rencana baru.
+
+Setelah dibuat, pengguna bisa memilih rencana untuk dikerjakan.
+
+### Langkah 10: Tambah TextEditingController
+
+![img](img/p3/10.png)
+
+Penjelasan:
+
+Controller untuk menangani input teks nama rencana.
+
+dispose() digunakan untuk membersihkan resource.
+
+### Langkah 11: Method build()
+
+![img](img/p3/11.png)
+
+Penjelasan:
+
+Tampilan utama screen pembuat rencana.
+
+Menampilkan daftar rencana dan form input.
+
+### Langkah 12: Widget \_buildListCreator()
+
+![img](img/p3/12.png)
+
+Penjelasan:
+
+Form input untuk menambahkan rencana baru.
+
+Memanggil addPlan() saat selesai mengetik.
+
+### Langkah 13: Method addPlan()
+
+![img](img/p3/13.png)
+
+Penjelasan:
+
+Membuat objek Plan baru dari input teks.
+
+Menambahkannya ke list di PlanProvider.
+
+Membersihkan input dan memicu rebuild.
+
+### Langkah 14: Widget \_buildMasterPlans()
+
+![img](img/p3/14.png)
+
+Penjelasan:
+
+Menampilkan semua rencana yang sudah dibuat.
+
+Saat diklik, membuka PlanScreen untuk rencana tersebut.
+
+✅ Kesimpulan Praktikum 3
+Kamu berhasil mengelola multiple state screen dengan InheritedNotifier.
+
+Struktur aplikasi kini mendukung banyak rencana dan navigasi antar screen.
+
+Ini adalah fondasi penting untuk membangun aplikasi produktivitas yang kompleks.
+
+### 🧩 Jawaban Soal 2: Maksud dari Gambar Diagram
+
+Diagram tersebut menunjukkan perubahan struktur widget tree saat aplikasi Flutter melakukan navigasi dari PlanCreatorScreen ke PlanScreen.
+
+🟦 Sebelum Navigasi (Kiri: PlanCreatorScreen)
+Aplikasi berada di halaman awal tempat pengguna membuat dan memilih rencana (Plan).
+
+Struktur widget:
+
+MaterialApp sebagai root aplikasi.
+
+PlanProvider menyimpan dan menyebarkan data List<Plan>.
+
+PlanCreatorScreen berisi:
+
+TextField untuk input nama rencana.
+
+ListView untuk menampilkan daftar rencana yang sudah dibuat.
+
+🟨 Setelah Navigasi (Kanan: PlanScreen)
+Setelah pengguna memilih salah satu rencana, aplikasi berpindah ke halaman detail rencana (PlanScreen).
+
+Struktur widget:
+
+MaterialApp tetap sebagai root.
+
+PlanScreen menjadi halaman aktif.
+
+Scaffold digunakan untuk menyusun layout standar Flutter.
+
+Column berisi:
+
+Expanded > ListView: menampilkan daftar tugas (Task) dalam rencana.
+
+SafeArea > Text: menampilkan progres tugas (jumlah yang sudah selesai).
+
+### 🧩 Jawaban Soal 3: Capture Langkah 14 dan Penjelasan
+
+![img](img/p3/praktikum4.gif)
+
+Pada Langkah 14 Praktikum 3, kita membuat widget bernama \_buildMasterPlans() yang berfungsi untuk:
+
+Menampilkan daftar semua rencana (Plan) yang telah dibuat oleh pengguna.
+
+Menampilkan pesan dan ikon jika belum ada rencana.
+
+Menavigasi ke halaman PlanScreen saat pengguna memilih salah satu rencana.
+
+Setelah menjalankan aplikasi dan melakukan capture hasilnya dalam bentuk GIF, tampilan yang terlihat adalah:
+
+Daftar rencana yang ditampilkan dalam bentuk ListView.
+
+Setiap item menampilkan nama rencana dan progres tugas (jumlah yang sudah selesai).
+
+Saat salah satu item diklik, aplikasi berpindah ke halaman detail rencana (PlanScreen) yang menampilkan daftar tugas dan tombol tambah.
+
+📦 Penjelasan Apa yang Telah Dibuat
+Widget \_buildMasterPlans() menggunakan ValueNotifier<List<Plan>> dari PlanProvider untuk mengambil semua rencana.
+
+Jika list kosong, ditampilkan ikon dan teks “Anda belum memiliki rencana apapun.”
+
+Jika list berisi data, ditampilkan ListTile untuk setiap rencana.
+
+Navigasi dilakukan dengan Navigator.push() ke PlanScreen, membawa data Plan yang dipilih.
+
+Ini adalah implementasi state management lintas screen, di mana data tetap konsisten meskipun berpindah halaman.
