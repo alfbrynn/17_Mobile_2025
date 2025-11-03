@@ -118,4 +118,76 @@ Langkah 1: Tiga method returnOneAsync(), returnTwoAsync(), dan returnThreeAsync(
 
 Langkah 2: Method count() menjalankan ketiga method tersebut secara berurutan menggunakan await, menjumlahkan hasilnya ke dalam variabel total, lalu menampilkan hasilnya ke UI dengan setState().
 
+### 📸 Dokumentasi Praktikum
+
 ![img](img/p2/a1.gif)
+
+## 📘 Praktikum 3: Menggunakan Completer di Future
+
+### 🎯 Tujuan
+
+Memahami cara kerja Completer untuk membuat dan menyelesaikan Future secara manual, serta membandingkannya dengan pendekatan then dan catchError.
+
+### 🧱 Langkah-langkah Praktikum
+
+#### Langkah 1: Import Package async
+
+Tambahkan import berikut di bagian atas main.dart:
+
+dart
+import 'package:async/async.dart';
+📌 Penjelasan: Package ini menyediakan class Completer yang digunakan untuk membuat Future secara manual.
+
+#### Langkah 2: Tambahkan Variabel dan Method
+
+Tambahkan di dalam class \_FuturePageState:
+
+dart
+late Completer<int> completer;
+
+Future<int> getNumber() {
+completer = Completer<int>();
+calculate();
+return completer.future;
+}
+
+Future<void> calculate() async {
+await Future.delayed(const Duration(seconds: 5));
+completer.complete(42);
+}
+📌 Penjelasan:
+
+Completer<int> membuat objek Future yang belum selesai.
+
+getNumber() menginisialisasi Completer, memanggil calculate(), dan mengembalikan Future.
+
+calculate() menunggu 5 detik, lalu menyelesaikan Future dengan nilai 42.
+
+#### Soal 5: Jelaskan maksud kode langkah 2 tersebut!
+
+Kode tersebut membuat Future secara manual menggunakan Completer. Fungsi getNumber() mengembalikan Future yang belum selesai, dan fungsi calculate() menyelesaikannya setelah 5 detik dengan nilai 42. Ini berguna saat kita ingin mengontrol kapan dan bagaimana Future diselesaikan.
+
+#### Langkah 3: Ganti Isi Tombol onPressed
+
+Ubah tombol menjadi:
+
+dart
+ElevatedButton(
+child: const Text('GO!'),
+onPressed: () {
+getNumber().then((value) {
+setState(() {
+result = value.toString();
+});
+});
+},
+),
+📌 Penjelasan: Ketika tombol ditekan, getNumber() dipanggil dan menunggu hasil dari Completer. Setelah 5 detik, nilai 42 ditampilkan di UI.
+
+#### Langkah 4: Jalankan Aplikasi
+
+Jalankan dengan F5 atau flutter run.
+
+Setelah 5 detik, angka 42 akan muncul di layar.
+
+![img](img/p3/p3-1.gif)
