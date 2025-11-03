@@ -191,3 +191,27 @@ Jalankan dengan F5 atau flutter run.
 Setelah 5 detik, angka 42 akan muncul di layar.
 
 ![img](img/p3/p3-1.gif)
+
+#### Langkah 5: Ganti Method calculate()
+
+Ubah isi method calculate() menjadi:
+
+![img](img/p3/05.png)
+
+Atau buat versi baru calculate2() jika ingin membandingkan.
+
+#### Langkah 6: Ganti Isi Tombol onPressed
+
+Ubah menjadi:
+
+![img](img/p3/06.png)
+
+📌 Penjelasan: Ini adalah versi dengan then dan catchError untuk menangani error jika Completer gagal diselesaikan.
+
+#### ✅ Soal 6: Jelaskan maksud perbedaan kode langkah 2 dengan langkah 5-6 tersebut!
+
+Langkah 2 menggunakan pendekatan async/await untuk menyelesaikan Future secara manual dan langsung mengupdate UI. Langkah 5-6 menggunakan pendekatan then/catchError untuk menangani hasil dan error dari Future. Perbedaannya terletak pada gaya penulisan dan cara menangani hasil: async/await lebih linear dan mudah dibaca, sedangkan then/catchError lebih cocok untuk chaining dan penanganan error eksplisit.
+
+## 📸 Dokumentasi Praktikum
+
+![img](img/p3/p3-2.gif)
