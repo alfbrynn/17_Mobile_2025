@@ -66,3 +66,56 @@ catchError → digunakan untuk menangkap error dari proses asynchronous. Jika te
 ### 📸 Dokumentasi Akhir Praktikum 1
 
 ![img](img/p1/a1.gif)
+
+## 📘 Praktikum 2: Menggunakan await/async untuk Menghindari Callbacks
+
+### 🎯 Tujuan
+
+Menghindari callback berlapis dengan menggunakan async dan await agar kode lebih rapi dan mudah dirawat.
+
+### 🧱 Langkah-langkah Praktikum
+
+#### Langkah 1: Tambahkan 3 Method Asynchronous
+
+Tambahkan method berikut ke dalam class \_FuturePageState:
+
+![img](img/p2/01.png)
+
+📌 Penjelasan: Setiap method mensimulasikan proses asynchronous selama 3 detik, lalu mengembalikan nilai integer. Ini seperti menunggu respons dari server.
+
+#### Langkah 2: Tambahkan Method count()
+
+![img](img/p2/02.png)
+
+📌 Penjelasan:
+
+await digunakan untuk menunggu hasil dari masing-masing method.
+
+Nilai dikumpulkan ke dalam total.
+
+Setelah semua selesai, setState() dipanggil untuk menampilkan hasil ke UI.
+
+#### Langkah 3: Panggil count() di Tombol
+
+Ubah isi tombol ElevatedButton menjadi:
+
+![img](img/p2/03.png)
+
+📌 Penjelasan: Ketika tombol ditekan, fungsi count() dijalankan. Karena semua proses asynchronous dijalankan secara berurutan, total waktu tunggu adalah 9 detik.
+
+#### Langkah 4: Jalankan Aplikasi
+
+Jalankan aplikasi dengan F5 atau flutter run.
+
+Setelah 9 detik, hasil 6 akan muncul di layar.
+
+### ✅ Jawaban Soal 4
+
+Soal 4: Jelaskan maksud kode langkah 1 dan 2 tersebut!
+
+Jawaban:
+Langkah 1: Tiga method returnOneAsync(), returnTwoAsync(), dan returnThreeAsync() adalah simulasi proses asynchronous yang masing-masing menunggu selama 3 detik sebelum mengembalikan nilai 1, 2, dan 3.
+
+Langkah 2: Method count() menjalankan ketiga method tersebut secara berurutan menggunakan await, menjumlahkan hasilnya ke dalam variabel total, lalu menampilkan hasilnya ke UI dengan setState().
+
+![img](img/p2/a1.gif)
