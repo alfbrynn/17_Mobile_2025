@@ -385,7 +385,8 @@ lib/geolocation.dart
 
 ![img](img/p6/06.png)
 
-✅ Jawaban Soal Praktikum
+### ✅ Jawaban Soal Praktikum
+
 🔸 Soal 11: Tambahkan nama panggilan
 Sudah ditambahkan di title pada AppBar dan MaterialApp.
 
@@ -401,3 +402,81 @@ await Future.delayed(const Duration(seconds: 3));
 ### 📸 Dokumentasi Praktikum
 
 ![img](img/p6/p6-1.gif)
+
+## 📘 Praktikum 7: Manajemen Future dengan FutureBuilder
+
+### 🎯 Tujuan
+
+Menggunakan FutureBuilder untuk menampilkan data lokasi GPS secara asynchronous tanpa perlu memanggil setState secara manual.
+
+### 🧱 Langkah-langkah Praktikum
+
+#### Langkah 1: Modifikasi Method getPosition()
+
+Ubah isi method getPosition() di file geolocation.dart menjadi:
+
+![img](img/p7/01.png)
+
+📌 Penjelasan: Kita tambahkan delay agar loading spinner (CircularProgressIndicator) muncul sebelum data ditampilkan.
+
+#### Langkah 2: Tambahkan Variabel position
+
+Di dalam class \_LocationScreenState, tambahkan:
+
+![img](img/p7/02.png)
+
+📌 Penjelasan: Variabel ini akan menyimpan Future dari posisi GPS yang akan digunakan oleh FutureBuilder.
+
+#### Langkah 3: Tambahkan initState()
+
+Tambahkan method berikut:
+
+![img](img/p7/03.png)
+
+📌 Penjelasan: Saat widget dibuat, kita langsung memanggil getPosition() dan menyimpan hasilnya di position.
+
+#### Langkah 4: Edit Method build()
+
+Ubah method build() menjadi:
+
+![img](img/p7/04.png)
+
+📌 Penjelasan: FutureBuilder akan otomatis membangun ulang UI saat status Future berubah. Tidak perlu lagi memanggil setState() secara manual.
+
+✅ Soal 13:
+
+Apakah ada perbedaan UI dengan praktikum sebelumnya? Jawaban: Ya, sekarang kita menggunakan FutureBuilder yang secara otomatis mengatur tampilan berdasarkan status Future. UI jadi lebih bersih dan reaktif tanpa perlu setState().
+
+📸 Capture hasil aplikasi dan tambahkan ke README.md. 💾 Commit:
+
+![img](img/p7/p7-1.gif)
+
+bash
+git commit -m "W11: Soal 13"
+
+#### Langkah 5: Tambahkan Handling Error
+
+Ubah bagian ConnectionState.done menjadi:
+
+![img](img/p7/05.png)
+
+📌 Penjelasan: Kita tambahkan pengecekan snapshot.hasError untuk menangani jika terjadi error saat mengambil lokasi.
+
+✅ Soal 14:
+
+Apakah ada perbedaan UI dengan langkah sebelumnya? Jawaban: Ya, sekarang jika terjadi error, UI akan menampilkan pesan 'Something terrible happened!' daripada kosong atau crash. Ini membuat aplikasi lebih tangguh dan informatif.
+
+### 📸 Capture hasil error dan tambahkan ke README.md. 💾 Commit:
+
+![img](img/p7/p7-2.gif)
+
+bash
+git commit -m "W11: Soal 14"
+
+### ✨ Kesimpulan
+
+FutureBuilder adalah cara yang lebih efisien dan reaktif untuk mengelola data asynchronous di Flutter.
+
+Kita tidak perlu lagi memanggil setState() secara manual.
+
+Penanganan error jadi lebih mudah dan UI tetap stabil.
