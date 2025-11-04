@@ -326,3 +326,78 @@ Keduanya menangani error dengan baik, namun async/await lebih cocok untuk kode y
 ### 📸 Dokumentasi Praktikum
 
 ![img](img/p5/p5-2.gif)
+
+## 📘 Praktikum 6: Menggunakan Future dengan StatefulWidget
+
+### 🎯 Tujuan
+
+Menampilkan data lokasi GPS pengguna menggunakan plugin geolocator, dan mengelola hasilnya dengan StatefulWidget agar bisa ditampilkan di UI.
+
+### 🧱 Langkah-langkah Praktikum
+
+#### Langkah 1: Install Plugin Geolocator
+
+bash
+flutter pub add geolocator
+
+![img](img/p6/01.png)
+
+📌 Penjelasan: Plugin geolocator digunakan untuk mengambil data lokasi GPS pengguna.
+
+#### Langkah 2: Tambahkan Permission GPS
+
+Untuk Android:
+Tambahkan di android/app/src/main/AndroidManifest.xml:
+
+xml
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+Untuk iOS:
+Tambahkan di ios/Runner/Info.plist:
+
+xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>This app needs to access your location</string>
+
+Karena saya menggunakan android, saya menggunakan yang untuk android
+
+![img](img/p6/02.png)
+
+📌 Penjelasan: Ini adalah izin agar aplikasi bisa mengakses lokasi pengguna.
+
+#### Langkah 3: Buat File geolocation.dart
+
+Buat file baru di folder lib:
+
+bash
+lib/geolocation.dart
+
+#### Langkah 4: Buat StatefulWidget LocationScreen
+
+![img](img/p6/04.png)
+
+#### Langkah 5: Isi Kode geolocation.dart
+
+![img](img/p6/05.png)
+
+#### Langkah 6: Edit main.dart
+
+![img](img/p6/06.png)
+
+✅ Jawaban Soal Praktikum
+🔸 Soal 11: Tambahkan nama panggilan
+Sudah ditambahkan di title pada AppBar dan MaterialApp.
+
+![img](img/p6/s1.png)
+
+🔸 Soal 12: Tambahkan delay dan jelaskan hasilnya
+dart
+await Future.delayed(const Duration(seconds: 3));
+📌 Penjelasan: Delay ini membuat animasi loading (CircularProgressIndicator) terlihat sebelum data lokasi muncul.
+
+❓ Apakah koordinat GPS muncul saat dijalankan di browser? ❌ Tidak. Karena browser tidak mendukung akses langsung ke sensor GPS perangkat seperti emulator atau device fisik.
+
+### 📸 Dokumentasi Praktikum
+
+![img](img/p6/p6-1.gif)
