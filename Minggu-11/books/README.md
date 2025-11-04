@@ -534,3 +534,52 @@ Ketika tombol ditekan di screen kedua, warna yang dipilih dikirim kembali ke scr
 ### 📸 Capture hasil aplikasi saat warna berubah dan konversi ke GIF.
 
 ![img](img/p8/p8-1.gif)
+
+## 📘 Praktikum 9: Memanfaatkan async/await dengan Widget Dialog
+
+### 🎯 Tujuan
+
+Menggunakan AlertDialog sebagai fungsi asynchronous untuk menerima pilihan warna dari pengguna, lalu memperbarui tampilan berdasarkan hasil dialog.
+
+### 🧱 Langkah-langkah Praktikum
+
+#### Langkah 1: Buat File Baru
+
+Buat file baru di folder lib:
+
+bash
+lib/navigation_dialog.dart
+
+#### Langkah 2: Isi Kode navigation_dialog.dart
+
+![img](img/p9/02.png)
+
+📌 Penjelasan:
+
+showDialog() mengembalikan Future<Color> berdasarkan pilihan pengguna.
+
+Setelah dialog ditutup, warna yang dipilih digunakan untuk mengubah background screen.
+
+#### Langkah 3: Edit main.dart
+
+![img](img/p9/03.png)
+
+### ✅ Jawaban Soal Praktikum
+
+🔸 Soal 17: Cobalah klik setiap button, apa yang terjadi? Mengapa demikian?
+Ketika tombol Red, Green, atau Purple ditekan, dialog akan ditutup dan mengembalikan warna yang dipilih ke fungsi \_showColorDialog(). Fungsi ini menunggu hasil dari dialog menggunakan await, lalu memperbarui warna background dengan setState(). Ini terjadi karena showDialog() adalah fungsi asynchronous yang mengembalikan nilai saat pengguna membuat pilihan.
+
+### 📸 Capture hasil aplikasi saat warna berubah dan konversi ke GIF. 💾 Commit:
+
+![img](img/p9/p9.gif)
+
+bash
+git commit -m "W11: Soal 17"
+
+### ✨ Kesimpulan
+
+AlertDialog bisa digunakan sebagai fungsi asynchronous untuk menerima input dari pengguna.
+
+Dengan await, kita bisa menunggu hasil dialog dan langsung memperbarui UI.
+
+Praktikum ini menunjukkan bagaimana Flutter mengintegrasikan UI dan logika asynchronous secara elegan.
