@@ -1,4 +1,18 @@
-# 11 | Pemrograman Asynchronus
+# 11 | Pemrograman Asynchronus 📱
+
+## Daftar Isi
+
+1. [Praktikum 1: Mengunduh Data dari Web Service (API)](#-praktikum-1-mengunduh-data-dari-web-service-api)
+2. [Praktikum 2: Menggunakan await/async](#-praktikum-2-menggunakan-awaitasync-untuk-menghindari-callbacks)
+3. [Praktikum 3: Menggunakan Completer di Future](#-praktikum-3-menggunakan-completer-di-future)
+4. [Praktikum 4: Memanggil Future Secara Paralel](#-praktikum-4-memanggil-future-secara-paralel)
+5. [Praktikum 5: Menangani Respon Error pada Async Code](#-praktikum-5-menangani-respon-error-pada-async-code)
+6. [Praktikum 6: Menggunakan Future dengan StatefulWidget](#-praktikum-6-menggunakan-future-dengan-statefulwidget)
+7. [Praktikum 7: Manajemen Future dengan FutureBuilder](#-praktikum-7-manajemen-future-dengan-futurebuilder)
+8. [Praktikum 8: Navigation Route dengan Future Function](#-praktikum-8-navigation-route-dengan-future-function)
+9. [Praktikum 9: Memanfaatkan async/await dengan Widget Dialog](#-praktikum-9-memanfaatkan-asyncawait-dengan-widget-dialog)
+
+---
 
 ## 📘 Praktikum 1: Mengunduh Data dari Web Service (API)
 
@@ -10,15 +24,15 @@ Membuat aplikasi Flutter yang mengambil data dari Google Books API secara asynch
 
 #### Langkah 1: Buat Project Baru
 
-`flutter create books`
+```bash
+flutter create books
+cd books
+flutter pub add http
+```
 
-`cd books`
+![Membuat project baru](img/p1/01.png)
 
-`flutter pub add http`
-
-![img](img/p1/01.png)
-
-📌 Penjelasan: Kita membuat project Flutter bernama books, lalu menambahkan dependency http agar bisa melakukan request ke API.
+> 📌 **Penjelasan**: Kita membuat project Flutter bernama books, lalu menambahkan dependency http agar bisa melakukan request ke API.
 
 #### Langkah 2: Cek pubspec.yaml
 
