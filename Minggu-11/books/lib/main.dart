@@ -81,6 +81,11 @@ class _FuturePageState extends State<FuturePage> {
     });
   }
 
+  Future returnError() async {
+    await Future.delayed(const Duration(seconds: 2));
+    throw Exception('Something terrible happened!');
+  }
+
   void returnFG() {
     // FutureGroup<int> futureGroup = FutureGroup<int>();
     // futureGroup.add(returnOneAsync());
@@ -109,6 +114,18 @@ class _FuturePageState extends State<FuturePage> {
         result = total.toString();
       });
     });
+  }
+
+  Future handleError() async {
+    try {
+      await returnError();
+    } catch (error) {
+      setState(() {
+        result = error.toString();
+      });
+    } finally {
+      print('Complete');
+    }
   }
 
   @override
@@ -144,33 +161,53 @@ class _FuturePageState extends State<FuturePage> {
             // const Spacer(),
             // const CircularProgressIndicator(),
             // const Spacer(),
+            // ElevatedButton(
+            //   child: const Text('GO!'),
+            //   // onPressed: () {
+            //   //   count();
+            //   // },
+            //   onPressed: () {
+            //     // getNumber().then((value) {
+            //     //   setState(() {
+            //     //     result = value.toString();
+            //     //   });
+            //     // });
+            //     // ########################### p3 ###########################
+            //     // getNumber()
+            //     //     .then((value) {
+            //     //       setState(() {
+            //     //         result = value.toString();
+            //     //       });
+            //     //     })
+            //     //     .catchError((e) {
+            //     //       setState(() {
+            //     //         result = 'An error occurred';
+            //     //       });
+            //     //     });
+            //     // ########################### p4 ###########################
+            //     returnFG();
+            //   },
+            // ),
             ElevatedButton(
               child: const Text('GO!'),
-              // onPressed: () {
-              //   count();
-              // },
               onPressed: () {
-                // getNumber().then((value) {
-                //   setState(() {
-                //     result = value.toString();
-                //   });
-                // });
-                // ########################### p3 ###########################
-                // getNumber()
+                // ############################ p5 ###########################
+                // returnError()
                 //     .then((value) {
                 //       setState(() {
-                //         result = value.toString();
+                //         result = 'Success';
                 //       });
                 //     })
-                //     .catchError((e) {
+                //     .catchError((onError) {
                 //       setState(() {
-                //         result = 'An error occurred';
+                //         result = onError.toString();
                 //       });
-                //     });
-                // ########################### p4 ###########################
-                returnFG();
+                //     })
+                //     .whenComplete(() => print('Complete'));
+                handleError();
               },
             ),
+
             const Spacer(),
             Text(result),
             const Spacer(),

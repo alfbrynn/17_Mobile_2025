@@ -258,6 +258,71 @@ Langkah 4 menggunakan Future.wait, yang lebih ringkas dan merupakan fitur bawaan
 
 Keduanya menjalankan Future secara paralel dan mengembalikan hasil dalam bentuk List, namun Future.wait lebih sederhana untuk kasus umum.
 
-📸 Dokumentasi Praktikum
+### 📸 Dokumentasi Praktikum
 
 ![img](img/p4/p4-2.gif)
+
+## 📘 Praktikum 5: Menangani Respon Error pada Async Code
+
+### 🎯 Tujuan
+
+Memahami cara menangani error pada proses asynchronous agar aplikasi tetap stabil dan informatif saat terjadi kegagalan.
+
+### 🧱 Langkah-langkah Praktikum
+
+#### Langkah 1: Tambahkan Method returnError()
+
+Tambahkan method ini ke dalam class \_FuturePageState:
+
+![img](img/p5/01.png)
+
+📌 Penjelasan: Method ini mensimulasikan error setelah delay 2 detik. Ini berguna untuk menguji bagaimana aplikasi menangani error dari proses asynchronous.
+
+#### Langkah 2: Ganti Isi Tombol dengan .then().catchError()
+
+![img](img/p5/02.png)
+
+📌 Penjelasan:
+
+then() → dijalankan jika Future berhasil.
+
+catchError() → menangkap error dan menampilkan pesan.
+
+whenComplete() → dijalankan di akhir, baik sukses maupun gagal.
+
+✅ Soal 9:
+
+Capture hasil aplikasi berupa GIF dan tambahkan ke README.md. Commit dengan pesan:
+
+![img](img/p5/p5-1.gif)
+
+#### Langkah 3: Tambahkan Method handleError() dengan try-catch-finally
+
+![img](img/p5/03.png)
+
+📌 Penjelasan:
+
+try → mencoba menjalankan returnError().
+
+catch → menangkap error dan menampilkan ke UI.
+
+finally → dijalankan di akhir, apapun hasilnya.
+
+#### Langkah 4: Ganti Tombol untuk Memanggil handleError()
+
+![img](img/p5/04.png)
+
+✅ Soal 10:
+
+Jelaskan perbedaan kode langkah 2 dan 4!
+
+✍️ Jawaban Soal 10:
+Langkah 2 menggunakan pendekatan chaining dengan .then().catchError().whenComplete() yang cocok untuk penanganan event-driven dan chaining.
+
+Langkah 4 menggunakan async/await dengan try-catch-finally, yang lebih linear dan mudah dibaca, terutama saat ada banyak proses berurutan.
+
+Keduanya menangani error dengan baik, namun async/await lebih cocok untuk kode yang kompleks dan berurutan.
+
+### 📸 Dokumentasi Praktikum
+
+![img](img/p5/p5-2.gif)
