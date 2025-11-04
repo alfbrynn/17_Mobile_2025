@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'navigation_first.dart';
+import 'geolocation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Navigation App - Alif',
+      title: 'Location App - Alif', // ✅ Soal 11
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const NavigationFirst(),
+      home: const LocationScreen(),
     );
   }
 }

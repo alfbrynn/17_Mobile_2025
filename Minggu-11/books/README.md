@@ -480,3 +480,57 @@ FutureBuilder adalah cara yang lebih efisien dan reaktif untuk mengelola data as
 Kita tidak perlu lagi memanggil setState() secara manual.
 
 Penanganan error jadi lebih mudah dan UI tetap stabil.
+
+## 📘 Praktikum 8: Navigation Route dengan Future Function
+
+### 🎯 Tujuan
+
+Menggunakan Navigator.push() sebagai fungsi asynchronous untuk menerima data dari screen kedua dan memperbarui tampilan screen pertama secara dinamis.
+
+### 🧱 Langkah-langkah Praktikum
+
+#### Langkah 1: Buat File navigation_first.dart
+
+Buat file baru di folder lib:
+
+bash
+lib/navigation_first.dart
+
+#### Langkah 2: Isi Kode navigation_first.dart
+
+![img](img/p8/02.png)
+
+📌 Penjelasan:
+
+Navigator.push() mengembalikan Future yang berisi data dari screen kedua.
+
+Setelah screen kedua ditutup, warna yang dipilih akan dikembalikan dan digunakan untuk mengubah background screen pertama.
+
+#### Langkah 3: Buat File navigation_second.dart
+
+bash
+lib/navigation_second.dart
+
+#### Langkah 4: Isi Kode navigation_second.dart
+
+![img](img/p8/04.png)
+
+📌 Penjelasan:
+
+Tiap tombol mengembalikan warna yang dipilih ke screen pertama menggunakan Navigator.pop(context, color).
+
+#### Langkah 5: Edit main.dart
+
+![img](img/p8/05.png)
+
+### ✅ Jawaban Soal Praktikum
+
+🔸 Soal 15: Tambahkan nama panggilan dan warna favorit
+Sudah ditambahkan di AppBar.title dan warna favorit diganti menjadi purple.
+
+🔸 Soal 16: Apa yang terjadi saat tombol ditekan?
+Ketika tombol ditekan di screen kedua, warna yang dipilih dikirim kembali ke screen pertama. Screen pertama langsung mengubah warna background-nya sesuai pilihan. Ini terjadi karena Navigator.push() bersifat asynchronous dan menunggu hasil dari screen kedua.
+
+### 📸 Capture hasil aplikasi saat warna berubah dan konversi ke GIF.
+
+![img](img/p8/p8-1.gif)
