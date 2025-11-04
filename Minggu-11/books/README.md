@@ -134,27 +134,16 @@ Memahami cara kerja Completer untuk membuat dan menyelesaikan Future secara manu
 
 Tambahkan import berikut di bagian atas main.dart:
 
-dart
-import 'package:async/async.dart';
+![img](img/p3/01.png)
+
 📌 Penjelasan: Package ini menyediakan class Completer yang digunakan untuk membuat Future secara manual.
 
 #### Langkah 2: Tambahkan Variabel dan Method
 
 Tambahkan di dalam class \_FuturePageState:
 
-dart
-late Completer<int> completer;
+![img](img/p3/02.png)
 
-Future<int> getNumber() {
-completer = Completer<int>();
-calculate();
-return completer.future;
-}
-
-Future<void> calculate() async {
-await Future.delayed(const Duration(seconds: 5));
-completer.complete(42);
-}
 📌 Penjelasan:
 
 Completer<int> membuat objek Future yang belum selesai.
@@ -171,17 +160,8 @@ Kode tersebut membuat Future secara manual menggunakan Completer. Fungsi getNumb
 
 Ubah tombol menjadi:
 
-dart
-ElevatedButton(
-child: const Text('GO!'),
-onPressed: () {
-getNumber().then((value) {
-setState(() {
-result = value.toString();
-});
-});
-},
-),
+![img](img/p3/03.png)
+
 📌 Penjelasan: Ketika tombol ditekan, getNumber() dipanggil dan menunggu hasil dari Completer. Setelah 5 detik, nilai 42 ditampilkan di UI.
 
 #### Langkah 4: Jalankan Aplikasi
@@ -215,3 +195,69 @@ Langkah 2 menggunakan pendekatan async/await untuk menyelesaikan Future secara m
 ## 📸 Dokumentasi Praktikum
 
 ![img](img/p3/p3-2.gif)
+
+## 📘 Praktikum 4: Memanggil Future Secara Paralel
+
+### 🎯 Tujuan
+
+Menjalankan beberapa Future secara paralel menggunakan FutureGroup dan Future.wait, lalu membandingkan efisiensi waktu dan gaya penulisan.
+
+### 🧱 Langkah-langkah Praktikum
+
+#### Langkah 1: Tambahkan Method returnFG()
+
+Tambahkan method ini ke dalam class \_FuturePageState:
+
+![img](img/p4/01.png)
+
+📌 Penjelasan:
+
+FutureGroup digunakan untuk menjalankan beberapa Future sekaligus.
+
+Setelah semua selesai, hasilnya berupa List<int>.
+
+Nilai dijumlahkan dan ditampilkan ke UI.
+
+#### Langkah 2: Panggil returnFG() di Tombol
+
+Ubah isi tombol menjadi:
+
+![img](img/p4/02.png)
+
+📌 Penjelasan: Ketika tombol ditekan, ketiga proses asynchronous dijalankan secara bersamaan, bukan berurutan.
+
+#### Langkah 3: Jalankan Aplikasi
+
+Jalankan aplikasi.
+
+✅ Soal 7:
+
+![img](img/p4/p4-1.gif)
+
+#### Langkah 4: Ganti dengan Future.wait
+
+Ubah method menjadi:
+
+![img](img/p4/04.png)
+
+📌 Penjelasan:
+
+Future.wait adalah cara native dari Dart untuk menjalankan banyak Future paralel.
+
+Hasilnya juga berupa List<int>, lalu dijumlahkan.
+
+✅ Soal 8:
+
+Jelaskan maksud perbedaan kode langkah 1 dan 4!
+
+#### ✍️ Jawaban Soal 8:
+
+Langkah 1 menggunakan FutureGroup dari package async, yang memberi kontrol lebih seperti menambahkan Future satu per satu dan menutup grup secara eksplisit.
+
+Langkah 4 menggunakan Future.wait, yang lebih ringkas dan merupakan fitur bawaan Dart.
+
+Keduanya menjalankan Future secara paralel dan mengembalikan hasil dalam bentuk List, namun Future.wait lebih sederhana untuk kasus umum.
+
+📸 Dokumentasi Praktikum
+
+![img](img/p4/p4-2.gif)
