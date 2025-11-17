@@ -239,3 +239,56 @@ Langkah 14: Menangani error dengan mengubah tampilan UI agar menunjukkan nilai -
 Langkah 15: Menguji apakah error ditangani dengan benar.
 
 Commit: "W12: Jawaban Soal 7"
+
+## Praktikum 3: Injeksi Data ke Streams
+
+✅ Langkah 1: Tambahkan variabel transformer
+
+![img](../img/p3/01.png)
+
+Penjelasan:
+
+StreamTransformer digunakan untuk memodifikasi data yang mengalir dalam stream.
+
+Kata kunci late menunjukkan bahwa variabel akan diinisialisasi nanti, sebelum digunakan.
+
+✅ Langkah 2: Inisialisasi transformer
+
+![img](../img/p3/02.png)
+
+Penjelasan:
+
+handleData: setiap angka yang masuk akan dikali 10.
+
+handleError: jika terjadi error, stream akan mengirim nilai -1.
+
+handleDone: menutup stream saat selesai.
+
+Ini adalah contoh transformasi data dan penanganan error secara reaktif.
+
+✅ Langkah 3: Terapkan transformer ke stream
+
+![img](../img/p3/03.png)
+
+Penjelasan:
+
+Stream asli ditransformasi menggunakan transformer.
+
+Setiap event yang masuk akan diproses oleh transformer dan hasilnya ditampilkan di UI.
+
+Jika terjadi error, UI akan menampilkan -1.
+
+✅ Soal 9: Jelaskan maksud kode langkah 1–3
+Jawaban Soal 9:
+
+Langkah 1: Menyiapkan variabel untuk menyimpan transformer.
+
+Langkah 2: Membuat transformer yang memodifikasi data stream dan menangani error.
+
+Langkah 3: Menerapkan transformer ke stream agar data yang masuk bisa diubah sebelum ditampilkan.
+
+Tujuan utama: memproses data stream secara dinamis dan aman sebelum digunakan di UI.
+
+Commit: "W12: Jawaban Soal 9"
+
+![img](../img/p3/Adobe%20Express%20-%20p3.gif)

@@ -30,12 +30,14 @@ class StreamHomePage extends StatefulWidget {
 }
 
 class _StreamHomePageState extends State<StreamHomePage> {
-  Color bgColor = Colors.blueGrey;
-  late ColorStream colorStream;
+  // Color bgColor = Colors.blueGrey;
+  // late ColorStream colorStream;
   int lastNumber = 0;
 
   late StreamController numberStreamController;
   late NumberStream numberStream;
+
+  late StreamTransformer transformer;
 
   @override
   void initState() {
@@ -43,15 +45,38 @@ class _StreamHomePageState extends State<StreamHomePage> {
     numberStreamController = numberStream.controller;
     Stream stream = numberStreamController.stream;
 
-    stream.listen((event) {
-      setState(() {
-        lastNumber = event;
-      });
-    });
+    // stream.listen((event) {
+    //   setState(() {
+    //     lastNumber = event;
+    //   });
+    // });
 
     super.initState();
 
+    // stream
+    //     .listen((event) {
+    //       setState(() {
+    //         lastNumber = event;
+    //       });
+    //     })
+    //     .onError((error) {
+    //       setState(() {
+    //         lastNumber = -1;
+    //       });
+    //     });
+
+    transformer = StreamTransformer<int, int>.fromHandlers(
+      handleData: (value, sink) {
+        sink.add(value * 10);
+      },
+      handleError: (error, trace, sink) {
+        sink.add(-1);
+      },
+      handleDone: (sink) => sink.close(),
+    );
+
     stream
+        .transform(transformer)
         .listen((event) {
           setState(() {
             lastNumber = event;
@@ -62,6 +87,8 @@ class _StreamHomePageState extends State<StreamHomePage> {
             lastNumber = -1;
           });
         });
+
+    super.initState();
   }
 
   @override
@@ -91,11 +118,11 @@ class _StreamHomePageState extends State<StreamHomePage> {
     // }
 
     // Alternatif menggunakan listen:
-    colorStream.getColors().listen((eventColor) {
-      setState(() {
-        bgColor = eventColor;
-      });
-    });
+    // colorStream.getColors().listen((eventColor) {
+    //   setState(() {
+    //     bgColor = eventColor;
+    //   });
+    // });
   }
 
   @override

@@ -33,7 +33,7 @@ class NumberStream {
     controller.close();
   }
 
-  void addError() {
-    controller.sink.addError('error');
-  }
+  // void addError() {
+  //   controller.sink.addError('error');
+  // }
 }
