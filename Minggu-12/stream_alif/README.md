@@ -292,3 +292,82 @@ Tujuan utama: memproses data stream secara dinamis dan aman sebelum digunakan di
 Commit: "W12: Jawaban Soal 9"
 
 ![img](../img/p3/Adobe%20Express%20-%20p3.gif)
+
+## Praktikum 4: Subscribe ke Stream Events
+
+✅ Langkah 1: Tambah variabel subscription
+
+![img](../img/p4/01.png)
+
+Penjelasan: Variabel ini digunakan untuk menyimpan hasil dari stream.listen(...), sehingga kita bisa mengontrolnya (misalnya menghentikan langganan).
+
+✅ Langkah 2: Edit initState() untuk menyimpan subscription
+
+![img](../img/p4/02.png)
+
+Penjelasan:
+
+subscription menyimpan hasil dari listen() agar bisa digunakan untuk cancel() atau onError() nanti.
+
+super.initState() tetap dipanggil agar siklus hidup widget berjalan normal.
+
+✅ Langkah 3: Tambah penanganan error dengan onError()
+
+![img](../img/p4/03.png)
+
+Penjelasan:
+
+Jika terjadi error pada stream, nilai lastNumber diubah menjadi -1 sebagai indikator error.
+
+✅ Langkah 4: Tambah penanganan selesai dengan onDone()
+
+![img](../img/p4/04.png)
+
+Penjelasan:
+
+Fungsi ini akan dipanggil saat stream selesai (ditutup).
+
+Cocok untuk logging atau membersihkan state.
+
+✅ Langkah 5: Tambah method stopStream()
+
+![img](../img/p4/05.png)
+
+Penjelasan:
+
+Menutup stream controller agar tidak menerima data lagi.
+
+Ini akan memicu onDone().
+
+✅ Langkah 6: Tambah tombol untuk menghentikan stream
+
+![img](../img/p4/06.png)
+
+Penjelasan:
+
+Tombol ini akan memanggil stopStream() saat ditekan.
+
+Stream akan berhenti dan onDone() akan dipanggil.
+
+✅ Langkah 7: Tambah validasi sebelum menambahkan angka
+
+![img](../img/p4/07.png)
+
+Penjelasan:
+
+Mengecek apakah stream masih terbuka sebelum menambahkan angka.
+
+Jika sudah ditutup, tampilkan -1 sebagai indikator.
+
+![img](../img/p4/p4.jpg)
+
+✅ Soal 10: Jelaskan maksud kode langkah 2, 6 dan 8
+Jawaban Soal 10:
+
+Langkah 2: Menyimpan subscription agar bisa dikontrol (cancel, error, done).
+
+Langkah 6: Menambahkan tombol untuk menghentikan stream dengan memanggil stopStream().
+
+Langkah 8 (addRandomNumber): Menambahkan angka acak ke stream jika masih aktif, atau menampilkan -1 jika sudah ditutup.
+
+Commit: "W12: Jawaban Soal 10"
