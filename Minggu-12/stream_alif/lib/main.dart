@@ -41,15 +41,26 @@ class _StreamHomePageState extends State<StreamHomePage> {
 
   late StreamSubscription subscription;
 
+  late StreamSubscription subscription2;
+  String values = '';
+
   @override
   void initState() {
     numberStream = NumberStream();
     numberStreamController = numberStream.controller;
-    Stream stream = numberStreamController.stream;
+
+    // Konversi stream menjadi broadcast agar bisa didengarkan lebih dari satu kali
+    Stream stream = numberStreamController.stream.asBroadcastStream();
 
     subscription = stream.listen((event) {
       setState(() {
-        lastNumber = event;
+        values += '$event - ';
+      });
+    });
+
+    subscription2 = stream.listen((event) {
+      setState(() {
+        values += '$event - ';
       });
     });
 
@@ -134,6 +145,18 @@ class _StreamHomePageState extends State<StreamHomePage> {
   //   numberStream.addNumberToSink(myNum);
   // }
 
+  // void addRandomNumber() {
+  //   Random random = Random();
+  //   int myNum = random.nextInt(10);
+  //   if (!numberStreamController.isClosed) {
+  //     numberStream.addNumberToSink(myNum);
+  //   } else {
+  //     setState(() {
+  //       lastNumber = -1;
+  //     });
+  //   }
+  // }
+
   void addRandomNumber() {
     Random random = Random();
     int myNum = random.nextInt(10);
@@ -141,7 +164,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
       numberStream.addNumberToSink(myNum);
     } else {
       setState(() {
-        lastNumber = -1;
+        values += '-1 - ';
       });
     }
   }
@@ -178,7 +201,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(lastNumber.toString()),
+            Text(values),
             ElevatedButton(
               onPressed: () => addRandomNumber(),
               child: const Text('New Random Number'),

@@ -371,3 +371,76 @@ Langkah 6: Menambahkan tombol untuk menghentikan stream dengan memanggil stopStr
 Langkah 8 (addRandomNumber): Menambahkan angka acak ke stream jika masih aktif, atau menampilkan -1 jika sudah ditutup.
 
 Commit: "W12: Jawaban Soal 10"
+
+## Praktikum 5: Multiple Stream Subscription
+
+✅ Langkah 1: Tambahkan variabel baru
+
+![img](../img/p5/01.png)
+
+Penjelasan:
+
+subscription2: untuk menyimpan langganan stream kedua.
+
+values: string yang akan menampung semua data stream yang masuk, dipisahkan dengan tanda -.
+
+✅ Langkah 2: Ubah initState() agar stream bisa didengarkan lebih dari sekali
+
+![img](../img/p5/02.png)
+
+Penjelasan:
+
+Kedua subscription (subscription dan subscription2) akan menerima data yang sama dan menambahkannya ke values.
+
+Error "Bad state: Stream has already been listened to" terjadi karena stream default di Dart hanya bisa didengarkan satu kali. Jika kamu mencoba memanggil listen() lebih dari sekali pada stream yang sama, maka akan muncul error ini.
+
+![img](../img/p5/02-error.png)
+
+asBroadcastStream() mengubah stream menjadi broadcast agar bisa didengarkan oleh lebih dari satu subscriber.
+
+![img](../img/p5/02-perbaikan.png)
+
+✅ Langkah 3: Tambahkan tampilan UI untuk menampilkan values
+
+![img](../img/p5/03.png)
+
+Penjelasan:
+
+Menampilkan nilai values yang berisi semua angka dari stream.
+
+Tombol "New Random Number" untuk menambahkan angka.
+
+Tombol "Stop Subscription" untuk menghentikan stream.
+
+✅ Langkah 4: Tambahkan method stopStream()
+
+![img](../img/p5/04.png)
+
+Penjelasan:
+
+Menutup stream controller agar tidak menerima data lagi.
+
+Ini akan menghentikan semua subscription.
+
+✅ Langkah 5: Tambahkan validasi di addRandomNumber()
+
+![img](../img/p5/05.png)
+
+Penjelasan:
+
+Menambahkan angka acak ke stream jika masih aktif.
+
+Jika stream sudah ditutup, tambahkan -1 sebagai penanda error.
+
+✅ Soal 11: Jelaskan mengapa nilai tampil dua kali
+Jawaban Soal 11:
+
+Karena stream diubah menjadi broadcast, maka bisa didengarkan oleh lebih dari satu subscriber.
+
+Kedua subscription (subscription dan subscription2) menerima data yang sama dan masing-masing menambahkan ke values.
+
+Akibatnya, setiap angka yang dikirim akan ditambahkan dua kali ke values.
+
+Commit: "W12: Jawaban Soal 11"
+
+![img](../img/p5/Adobe%20Express%20-%20p5.gif)
