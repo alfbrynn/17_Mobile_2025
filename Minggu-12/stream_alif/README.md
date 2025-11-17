@@ -1,16 +1,22 @@
-# stream_alif
+# 12 | Lanjutan State Manajemen dengan Streams
 
-A new Flutter project.
+## Praktikum 1: Dart Stream
 
-## Getting Started
+✅ Langkah 1: Buat Project Baru
+Buat project Flutter baru dengan nama stream_namaPanggilan di folder week-12/src/.
 
-This project is a starting point for a Flutter application.
+bash
+flutter create stream_alif
+Penjelasan: Ini membuat struktur dasar aplikasi Flutter. Nama project disesuaikan agar mudah dikenali sebagai hasil praktikum pribadi.
 
-A few resources to get you started if this is your first Flutter project:
+✅ Langkah 2: Buka file main.dart
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![img](../img/p1/2.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Soal 1 Jawaban:
+
+Nama panggilan ditambahkan pada judul aplikasi: 'Stream Alif'
+
+Warna tema diganti ke Colors.indigo
+
+Commit: "W12: Jawaban Soal 1"
