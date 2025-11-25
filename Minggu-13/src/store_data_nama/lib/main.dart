@@ -40,12 +40,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  String convertToJSON(List<Pizza> pizzas) {
-    final List<Map<String, dynamic>> jsonList = pizzas
-        .map((pizza) => pizza.toJson())
-        .toList();
-    return jsonEncode(jsonList);
-  }
+  // String convertToJSON(List<Pizza> pizzas) {
+  //   final List<Map<String, dynamic>> jsonList = pizzas
+  //       .map((pizza) => pizza.toJson())
+  //       .toList();
+  //   return jsonEncode(jsonList);
+  // }
 
   Future<List<Pizza>> readJsonFile() async {
     final jsonString = await rootBundle.rootBundle.loadString(
@@ -57,8 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
         .toList();
 
     // Tambahan langkah 25
-    final jsonOutput = convertToJSON(pizzas);
-    print(jsonOutput);
+    // final jsonOutput = convertToJSON(pizzas);
+    // print(jsonOutput);
 
     return pizzas;
   }
@@ -73,7 +73,11 @@ class _MyHomePageState extends State<MyHomePage> {
           final pizza = myPizzas[index];
           return ListTile(
             title: Text(pizza.pizzaName),
-            subtitle: Text(pizza.description),
+            subtitle: Text(
+              pizza.description.isNotEmpty
+                  ? pizza.description
+                  : 'No description',
+            ),
             trailing: Text("Rp ${pizza.price.toStringAsFixed(2)}"),
           );
         },

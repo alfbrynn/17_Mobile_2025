@@ -269,3 +269,7 @@ output debug console
 ![img](img/debug_console.png)
 
 ## Praktikum 2
+
+![img](img/03.png)
+
+## Praktikum 3
