@@ -242,6 +242,10 @@ print(json);
 
 📌 Penjelasan: Ini berguna jika kita ingin menyimpan kembali data ke file atau mengirim ke server.
 
+Output Praktikum 1
+
+![img](img/o1.jpg)
+
 ## 🧪 Praktikum 2: Handle Kompatibilitas Data JSON
 
 🔹 Langkah 1: Simulasikan Error
@@ -346,16 +350,7 @@ Tujuan: Menjalankan aplikasi untuk memastikan semua error dan nilai null telah d
 📝 Soal 4: Capture hasil running aplikasi
 Jawaban:
 
-Jalankan aplikasi.
-
-Ambil screenshot tampilan list pizza.
-
-Impor ke laporan praktikum.
-
-Commit dengan pesan:
-
-Code
-W13: Jawaban Soal 4
+![img](img/o2.jpg)
 
 ## Praktikum 3
 
@@ -414,40 +409,50 @@ Jika ada perubahan nama kunci JSON, cukup ubah di satu tempat (konstanta).
 
 Membuat kode lebih mudah dibaca dan dipahami oleh tim pengembang.
 
+![img](img/o3.jpg)
+
 ## Praktikum 4
 
 🔹 Langkah 1: Tambahkan Dependensi
 Kode (di terminal):
 
-bash
+```bash
 flutter pub add shared_preferences
+```
+
 Penjelasan: Menambahkan package shared_preferences ke proyek Flutter agar bisa digunakan untuk menyimpan data lokal secara sederhana.
 
 🔹 Langkah 2: Install Dependensi
 Kode (otomatis atau manual):
 
-bash
+```bash
 flutter pub get
+```
+
 Penjelasan: Mengunduh dan mengintegrasikan package yang baru ditambahkan ke dalam proyek.
 
 🔹 Langkah 3: Import Package
 Kode:
 
-dart
+```dart
 import 'package:shared_preferences/shared_preferences.dart';
+```
+
 Penjelasan: Mengimpor package agar bisa digunakan di file Dart.
 
 🔹 Langkah 4: Tambahkan Variabel appCounter
 Kode:
 
-dart
+```dart
 int appCounter = 0;
+```
+
 Penjelasan: Variabel ini digunakan untuk menyimpan jumlah pembukaan aplikasi.
 
 🔹 Langkah 5: Buat Method readAndWritePreference()
 Kode:
 
-dart
+```dart
 Future readAndWritePreference() async {
 SharedPreferences prefs = await SharedPreferences.getInstance();
 appCounter = prefs.getInt('appCounter') ?? 0;
@@ -457,6 +462,8 @@ setState(() {
 appCounter = appCounter;
 });
 }
+```
+
 Penjelasan:
 
 Mendapatkan instance SharedPreferences.
@@ -472,18 +479,20 @@ Memanggil setState() agar UI diperbarui.
 🔹 Langkah 6: Panggil di initState()
 Kode:
 
-dart
+```dart
 @override
 void initState() {
 super.initState();
 readAndWritePreference();
 }
+```
+
 Penjelasan: Memastikan readAndWritePreference() dipanggil saat aplikasi pertama kali dibuka.
 
 🔹 Langkah 7: Perbarui Tampilan (body)
 Kode:
 
-dart
+```dart
 child: Center(
 child: Column(
 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -498,12 +507,14 @@ child: Text('Reset counter'),
 ],
 ),
 ),
+```
+
 Penjelasan: Menampilkan jumlah pembukaan aplikasi dan tombol untuk mereset hitungan.
 
 🔹 Langkah 8: Buat Method deletePreference()
 Kode:
 
-dart
+```dart
 Future deletePreference() async {
 SharedPreferences prefs = await SharedPreferences.getInstance();
 await prefs.clear();
@@ -511,15 +522,19 @@ setState(() {
 appCounter = 0;
 });
 }
+```
+
 Penjelasan: Menghapus semua data dari SharedPreferences dan mengatur ulang appCounter ke 0.
 
 🔹 Langkah 9: Hubungkan Tombol Reset
 Sudah dilakukan di langkah 7 dengan:
 
-dart
+```dart
 onPressed: () {
 deletePreference();
 }
+```
+
 🔹 Langkah 10: Jalankan Aplikasi
 Penjelasan:
 
@@ -532,11 +547,312 @@ Tombol reset akan menghapus data dan mengatur ulang ke 0.
 ✅ Jawaban Soal 6
 Jawaban:
 
-Capture hasil aplikasi dalam bentuk GIF.
+![img](img/o4.gif)
 
-Lampirkan di README.
+## 🧪 Praktikum 5: Akses Filesystem dengan path_provider
 
-Commit dengan pesan:
+🔹 Langkah 1: Tambahkan Dependensi
+Tujuan: Menambahkan package eksternal untuk mengakses direktori sistem.
 
-bash
-git commit -m "W13: Jawaban Soal 6"
+```bash
+flutter pub add path_provider
+```
+
+📌 Penjelasan: Perintah ini akan menambahkan package path_provider ke file pubspec.yaml agar bisa digunakan dalam proyek.
+
+🔹 Langkah 2: Lakukan Import
+Tujuan: Mengimpor package agar bisa digunakan di file Dart.
+
+```dart
+import 'package:path_provider/path_provider.dart';
+```
+
+📌 Penjelasan: Package ini menyediakan fungsi untuk mendapatkan path direktori dokumen dan cache aplikasi.
+
+🔹 Langkah 3: Tambahkan Variabel Path State
+Tujuan: Menyimpan path direktori agar bisa ditampilkan di UI.
+
+```dart
+String documentsPath = '';
+String tempPath = '';
+```
+
+📌 Penjelasan: Dua variabel ini akan diisi dengan path direktori dokumen dan temporer.
+
+🔹 Langkah 4: Buat Method getPaths()
+Tujuan: Mengambil path direktori menggunakan fungsi dari path_provider.
+
+```dart
+Future getPaths() async {
+  final docDir = await getApplicationDocumentsDirectory();
+  final tempDir = await getTemporaryDirectory();
+  setState(() {
+    documentsPath = docDir.path;
+    tempPath = tempDir.path;
+  });
+}
+```
+
+📌 Penjelasan: Fungsi ini mengambil path direktori dan menyimpannya ke variabel state agar bisa ditampilkan.
+
+🔹 Langkah 5: Panggil getPaths() di initState()
+Tujuan: Menjalankan fungsi saat widget pertama kali dibuat.
+
+```dart
+@override
+void initState() {
+  super.initState();
+  getPaths();
+}
+```
+
+📌 Penjelasan: initState() adalah lifecycle method yang cocok untuk inisialisasi data.
+
+🔹 Langkah 6: Perbarui Tampilan
+Tujuan: Menampilkan path direktori di layar aplikasi.
+
+```dart
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(title: const Text('Path Provider')),
+    body: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Text('Doc path: $documentsPath'),
+        Text('Temp path: $tempPath'),
+      ],
+    ),
+  );
+}
+```
+
+📌 Penjelasan: Menggunakan Text widget untuk menampilkan path yang sudah diambil.
+
+🔹 Langkah 7: Run
+Tujuan: Menjalankan aplikasi dan melihat hasil path yang ditampilkan.
+
+📝 Soal 7: Capture hasil praktikum dan commit
+Jawaban:
+
+![img](img/o5.jpg)
+
+## 🧪 Praktikum 6: Akses Filesystem dengan Direktori
+
+🔹 Langkah 1: Import dart:io
+Tujuan: Mengakses dan memanipulasi file secara langsung.
+
+```dart
+import 'dart:io';
+```
+
+📌 Penjelasan: Library ini digunakan untuk operasi file seperti membaca dan menulis file teks.
+
+🔹 Langkah 2: Tambahkan Variabel File dan Text
+Tujuan: Menyimpan referensi file dan isi teks yang akan dibaca.
+
+```dart
+late File myFile;
+String fileText = '';
+```
+
+📌 Penjelasan: late digunakan karena file akan diinisialisasi setelah path tersedia.
+
+🔹 Langkah 3: Buat Method writeFile()
+Tujuan: Menulis data ke file di direktori dokumen.
+
+```dart
+Future<bool> writeFile() async {
+  try {
+    await myFile.writeAsString('Alif, 2141762001');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+```
+
+📌 Penjelasan: Data ditulis ke file pizzas.txt. Jika gagal, fungsi mengembalikan false.
+
+🔹 Langkah 4: Inisialisasi File dan Panggil writeFile() di initState()
+Tujuan: Menyiapkan file dan menulis data saat aplikasi dimulai.
+
+```dart
+@override
+void initState() {
+  getPaths().then((_) {
+    myFile = File('$documentsPath/pizzas.txt');
+    writeFile();
+  });
+  super.initState();
+}
+```
+
+📌 Penjelasan: File dibuat di direktori dokumen, lalu langsung ditulis.
+
+🔹 Langkah 5: Buat Method readFile()
+Tujuan: Membaca isi file dan menampilkannya di UI.
+
+```dart
+Future<bool> readFile() async {
+  try {
+    String fileContent = await myFile.readAsString();
+    setState(() {
+      fileText = fileContent;
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+```
+
+📌 Penjelasan: Isi file dibaca dan ditampilkan melalui variabel fileText.
+
+🔹 Langkah 6: Edit build() dan Tambahkan Tombol Baca
+Tujuan: Menyediakan UI untuk membaca file dan menampilkan hasilnya.
+
+```dart
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(title: const Text('Path Provider')),
+    body: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Text('Doc path: ' + documentsPath),
+        Text('Temp path: ' + tempPath),
+        ElevatedButton(
+          child: const Text('Read File'),
+          onPressed: () => readFile(),
+        ),
+        Text(fileText),
+      ],
+    ),
+  );
+}
+```
+
+📌 Penjelasan: Tombol akan memicu pembacaan file dan menampilkan hasilnya di bawah.
+
+🔹 Langkah 7: Run
+Tujuan: Menjalankan aplikasi dan menguji apakah file berhasil ditulis dan dibaca.
+
+📝 Soal 8: Jelaskan maksud kode pada langkah 3 dan 7
+Jawaban:
+
+Langkah 3: Fungsi writeFile() digunakan untuk menyimpan string ke file pizzas.txt. Ini menunjukkan bagaimana Flutter dapat menyimpan data lokal secara permanen di direktori dokumen.
+
+Langkah 7: Menjalankan aplikasi akan menampilkan path direktori dan isi file yang telah ditulis. Tombol "Read File" memungkinkan pengguna membaca isi file dan melihatnya langsung di layar.
+
+![img](img//o6.gif)
+
+## 🧪 Praktikum 7: Menyimpan Data dengan Enkripsi/Dekripsi
+
+🔹 Langkah 1: Tambahkan Dependensi
+Tujuan: Menambahkan package untuk penyimpanan data secara aman.
+
+```bash
+flutter pub add flutter_secure_storage
+```
+
+📌 Penjelasan: Package ini memungkinkan penyimpanan key-value secara terenkripsi di perangkat.
+
+🔹 Langkah 2: Import Package
+Tujuan: Mengimpor package agar bisa digunakan di file Dart.
+
+```dart
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+```
+
+📌 Penjelasan: Package ini menyediakan API untuk menyimpan dan membaca data secara aman.
+
+🔹 Langkah 3: Tambahkan Variabel dan Controller
+Tujuan: Menyimpan input pengguna dan hasil pembacaan data.
+
+```dart
+final pwdController = TextEditingController();
+String myPass = '';
+```
+
+📌 Penjelasan: pwdController menangkap input dari TextField, dan myPass menyimpan hasil pembacaan dari storage.
+
+🔹 Langkah 4: Inisialisasi Secure Storage
+Tujuan: Membuat objek penyimpanan dan menentukan key.
+
+```dart
+final storage = const FlutterSecureStorage();
+final myKey = 'myPass';
+```
+
+📌 Penjelasan: myKey digunakan sebagai identifier untuk menyimpan dan membaca data.
+
+🔹 Langkah 5: Buat Method writeToSecureStorage()
+Tujuan: Menyimpan data ke secure storage.
+
+```dart
+Future writeToSecureStorage() async {
+  await storage.write(key: myKey, value: pwdController.text);
+}
+```
+
+📌 Penjelasan: Data dari input disimpan secara terenkripsi menggunakan key myPass.
+
+🔹 Langkah 6: Buat Method readFromSecureStorage()
+Tujuan: Membaca data dari secure storage.
+
+```dart
+Future<String> readFromSecureStorage() async {
+  String secret = await storage.read(key: myKey) ?? '';
+  return secret;
+}
+```
+
+📌 Penjelasan: Jika data tidak ditemukan, akan dikembalikan string kosong.
+
+🔹 Langkah 7: Edit UI untuk Input dan Tombol
+Tujuan: Menyediakan antarmuka untuk menyimpan dan membaca data.
+
+```dart
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(title: const Text('Path Provider')),
+    body: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        TextField(controller: pwdController),
+        ElevatedButton(
+          child: const Text('Save Value'),
+          onPressed: () => writeToSecureStorage(),
+        ),
+        ElevatedButton(
+          child: const Text('Read Value'),
+          onPressed: () {
+            readFromSecureStorage().then((value) {
+              setState(() {
+                myPass = value;
+              });
+            });
+          },
+        ),
+        Text(myPass),
+      ],
+    ),
+  );
+}
+```
+
+📌 Penjelasan: TextField digunakan untuk input, dua tombol untuk menyimpan dan membaca, dan Text(myPass) untuk menampilkan hasil.
+
+🔹 Langkah 8: Jalankan Aplikasi
+Tujuan: Menguji apakah data berhasil disimpan dan dibaca secara aman.
+
+📝 Soal 9: Jelaskan maksud kode pada langkah 3 dan 7
+Jawaban:
+
+Langkah 3: Kode ini menyiapkan controller untuk menangkap input dari pengguna dan variabel myPass untuk menyimpan hasil pembacaan dari secure storage. Ini penting agar data bisa dikirim dan ditampilkan kembali.
+
+Langkah 7: Kode ini membangun UI yang memungkinkan pengguna memasukkan data, menyimpannya secara aman, dan membacanya kembali. Tombol "Save Value" menyimpan data ke storage, dan tombol "Read Value" membaca data dan menampilkannya di layar.
+
+![img](img/o7.gif)
