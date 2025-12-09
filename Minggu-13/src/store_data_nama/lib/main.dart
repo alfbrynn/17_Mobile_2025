@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+// ignore: library_prefixes
 import 'package:flutter/services.dart' as rootBundle;
+import 'package:store_data_nama/httphelper.dart';
 import 'model/pizza.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
@@ -149,35 +151,37 @@ class _MyHomePageState extends State<MyHomePage> {
     return secret;
   }
 
+  Future<List<Pizza>> callPizzas() async {
+    HttpHelper helper = HttpHelper();
+    List<Pizza> pizzas = await helper.getPizzaList();
+    return pizzas;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Path Provider')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            TextField(controller: pwdController),
-            ElevatedButton(
-              child: Text('Save Value'),
-              onPressed: () {
-                writeToSecureStorage();
-              },
-            ),
-            ElevatedButton(
-              child: Text('Read Value'),
-              onPressed: () {
-                readFromSecureStorage().then((value) {
-                  setState(() {
-                    myPass = value;
-                  });
-                });
-              },
-            ),
-            Text('Stored password: $myPass'),
-          ],
-        ),
+      appBar: AppBar(title: const Text('JSON')),
+      body: FutureBuilder(
+        future: callPizzas(),
+        builder: (BuildContext context, AsyncSnapshot<List<Pizza>> snapshot) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong');
+          }
+          if (!snapshot.hasData) {
+            return const CircularProgressIndicator();
+          }
+          return ListView.builder(
+            itemCount: (snapshot.data == null) ? 0 : snapshot.data!.length,
+            itemBuilder: (BuildContext context, int position) {
+              return ListTile(
+                title: Text(snapshot.data![position].pizzaName),
+                subtitle: Text(
+                  '${snapshot.data![position].description} - € ${snapshot.data![position].price}',
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
