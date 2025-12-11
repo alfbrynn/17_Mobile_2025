@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'pizza_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Store Data Alif',
+      title: 'Pizza App - Alif',
       theme: ThemeData(primarySwatch: Colors.indigo),
       home: const MyHomePage(),
     );
@@ -170,18 +171,79 @@ class _MyHomePageState extends State<MyHomePage> {
           if (!snapshot.hasData) {
             return const CircularProgressIndicator();
           }
+          // return ListView.builder(
+          //   itemCount: (snapshot.data == null) ? 0 : snapshot.data!.length,
+          //   itemBuilder: (BuildContext context, int position) {
+          //     return ListTile(
+          //       title: Text(snapshot.data![position].pizzaName),
+          //       subtitle: Text(
+          //         '${snapshot.data![position].description} - € ${snapshot.data![position].price}',
+          //       ),
+          //       onTap: () {
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //             builder: (context) => PizzaDetailScreen(
+          //               pizza: snapshot.data![position],
+          //               isNew: false,
+          //             ),
+          //           ),
+          //         );
+          //       },
+          //     );
+          //   },
+          // );
           return ListView.builder(
-            itemCount: (snapshot.data == null) ? 0 : snapshot.data!.length,
-            itemBuilder: (BuildContext context, int position) {
-              return ListTile(
-                title: Text(snapshot.data![position].pizzaName),
-                subtitle: Text(
-                  '${snapshot.data![position].description} - € ${snapshot.data![position].price}',
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              final pizza = snapshot.data![index];
+              return Dismissible(
+                key: Key(pizza.id.toString()),
+                direction: DismissDirection.endToStart,
+                background: Container(
+                  color: Colors.red,
+                  alignment: Alignment.centerRight,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Icon(Icons.delete, color: Colors.white),
+                ),
+                onDismissed: (direction) async {
+                  final helper = HttpHelper();
+                  final result = await helper.deletePizza(pizza.id);
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(result)));
+                  setState(() {
+                    snapshot.data!.removeAt(index);
+                  });
+                },
+                child: ListTile(
+                  title: Text(pizza.pizzaName),
+                  subtitle: Text('${pizza.description} - € ${pizza.price}'),
                 ),
               );
             },
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PizzaDetailScreen(
+                pizza: Pizza(
+                  id: 0,
+                  pizzaName: '',
+                  description: '',
+                  price: 0.0,
+                  imageUrl: '',
+                ),
+                isNew: true,
+              ),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
